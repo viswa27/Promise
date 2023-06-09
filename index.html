@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h3>Q1. Write one example explaining how you can write a callback function.</h3>
+  <P>callback is a function passed as an argument to another function</P>
+  <pre>
+        function callback(num1, num2, total ){
+            let ans = num1 * num2 - num2;
+            total(ans);
+        }
+        
+        function output(ans){
+            console.log("Total is : " + ans);
+        }
+        
+        callback(5, 6, output);
+    </pre>
+  <hr>
+  <h3>
+    <pre>
+        Q2. "Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+        Explain callback hell.
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7"
+    </pre>
+  </h3>
+  <pre>
+        function printNumWithDelay(){
+            let num=1;
+        
+            function numPrint(){
+                console.log(num);
+        
+                if (num < 7) {
+                    setTimeout(numPrint, num * 1000);
+                    num++;
+                }
+            }
+            numPrint();
+        }
+        
+        printNumWithDelay();
+    </pre>
+  <hr>
+  <h3>
+    <pre>
+        Q3. "Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be printed after 2 sec, 3 should be printed after 3 sec, and so on. 
+
+        Numbers
+        1
+        2
+        3
+        4
+        5
+        6
+        7"
+      </pre>
+  </h3>
+  <pre>
+            function delay(ms) {
+                return new Promise((resolve) => {
+                  setTimeout(resolve, ms);
+                });
+              }
+              
+              function printNumbersWithDelay() {
+                let num = 1;
+              
+                function printNumber() {
+                  console.log(num);
+              
+                  if (num < 7) {
+                    num++;
+                    delay(num * 1000).then(printNumber);
+                  }
+                }
+              
+                printNumber();
+              }
+              
+              printNumbersWithDelay();
+      </pre>
+  <hr>
+  <h3>Q4. "Create a promise function accepting an argument, if yes is passed to the function then it should go to
+    resolved state and print Promise Resolved, and if nothing is passed
+    then it should go to reject the state and catch the error and print Promise Rejected "
+  </h3>
+  <pre>
+            function checkArgument(arg) {
+                return new Promise((resolve, reject) => {
+                  if (arg === 'yes') {
+                    resolve('Promise Resolved');
+                  } else {
+                    reject('Promise Rejected');
+                  }
+                });
+              }
+              
+              checkArgument('yes')
+                .then(console.log)
+                .catch(console.error);
+              
+              checkArgument()
+                .then(console.log)
+                .catch(console.error);
+        </pre>
+  <hr>
+  <h3>Q5. Create examples to explain callback function</h3>
+  <pre>
+        function callback(num1, num2, total ){
+            let ans = num1 * num2 - num2;
+            total(ans);
+        }
+        
+        function output(ans){
+            console.log("Total is : " + ans);
+        }
+        
+        callback(5, 6, output);
+        </pre>
+  <hr>
+  <h3>Q6. Create examples to explain callback hell function</h3>
+  <pre>
+  function printNumWithDelay(){
+      let num=1;
+  
+      function numPrint(){
+          console.log(num);
+  
+          if (num < 7) {
+              setTimeout(numPrint, num * 1000);
+              num++;
+          }
+      }
+      numPrint();
+  }
+  </pre>
+  <hr>
+  <h3>Q7. Create examples to explain promises function</h3>
+  <pre>
+  function checkArgument(arg) {
+      return new Promise((resolve, reject) => {
+        if (arg === 'yes') {
+          resolve('Promise Resolved');
+        } else {
+        reject('Promise Rejected');
+      }
+    });
+  }
+    
+  checkArgument('yes')
+      .then(console.log)
+      .catch(console.error);
+    
+  checkArgument()
+      .then(console.log)
+      .catch(console.error);
+  </pre>
+  <hr>
+  <h3>Q8. Create examples to explain async await function</h3>
+  <pre>
+    function delayExecution(ms) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      });
+    }
+    
+    async function executeDelayed() {
+      console.log('Executing...');
+      await delayExecution(2000);
+      console.log('Delayed execution complete!');
+    }
+    
+    executeDelayed();
+  </pre>
+  <hr>
+  <h3>Q9. Create examples to explain promise.all function</h3>
+  <pre>
+    function delay(value, ms) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(value);
+        }, ms);
+      });
+    }
+
+    const promise1 = delay('Hey', 2000);
+    const promise2 = delay('Caney', 1000);
+    const promise3 = delay('@', 1500);
+
+    Promise.all([promise1, promise2, promise3])
+      .then((results) => {
+        console.log(results.join(' '));
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+    });
+  </pre>
+  <script src="Script.js"></script>
+</body>
+
+</html>
